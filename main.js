@@ -1,39 +1,24 @@
-function tocaSom (seletorAudio) {
-    const elemento = document.querySelector(seletorAudio);
+// ----- MANEIRA INADEQUADA -----
+// function tocaSomPom () {
+//     document.querySelector("#som_tecla_pom").play()
+// }
+// document.querySelector(".tecla_pom").onclick = tocaSomPom
 
-    if (elemento && elemento.localName === 'audio') {
-        elemento.play();
-    }
-    else {
-        //alert('Elemento não encontrado');
-        console.log('Elemento não encontrado ou seletor inválido');
-    }
+// ------ FUNÇÃO PARA TOCAR O SOM ------
 
-}
+const listaDeTeclas = document.querySelectorAll(".tecla")
 
-const listaDeTeclas = document.querySelectorAll('.tecla');
+function tocaSom(idElementoAudio) {
+  let elemento = document.querySelector(idElementoAudio)
+  elemento.play()
+}  
 
-//para
-for (let contador = 0; contador < listaDeTeclas.length; contador++) {
-
-    const tecla = listaDeTeclas[contador];
-    const instrumento = tecla.classList[1];
-    const idAudio = `#som_${instrumento}`; //template string
-
-    tecla.onclick = function () {
-        tocaSom(idAudio);
-    }
-
-    tecla.onkeydown = function (evento) {
-
-        if (evento.code === 'Space' || evento.code === 'Enter') {
-            tecla.classList.add('ativa');
-        }
-
-    }
-
-    tecla.onkeyup = function () {
-        tecla.classList.remove('ativa');
-    }
+for(let contador = 0; contador<listaDeTeclas.length; contador++){
+  const tecla = listaDeTeclas[contador]
+  const instrumento = tecla.classList[1]
+  
+  tecla.onclick = () => tocaSom(`#som_${instrumento}`)
 
 }
+
+
